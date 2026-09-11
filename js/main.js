@@ -1,43 +1,70 @@
-// 1. Đổi màu chữ khi click nút
-// Tạo 1 nút bấm và 1 đoạn văn bản. Khi click nút, đổi màu chữ của đoạn văn sang màu đỏ.
-
 function changeColor() {
-    obj = document.querySelector("#lesson_1 .content")
-    if (obj)
-        obj.style.color = "red"
+    const text = document.querySelector("#lesson_1 .content")
+    if (text) text.style.color = "red"
 }
-
-// 2. Ẩn/hiện phần tử
-// Tạo 1 nút "Ẩn/Hiện" và 1 hình ảnh (hoặc div). Click nút thì toggle hiển thị/ẩn phần tử đó.
 
 function displayToggle() {
-    obj = document.querySelector("#lesson_2 .content")
-    
-    if (obj) {
-        obj.style = (obj.style.display != "block") ? "display: block": "display: none"
-    }
+    const content = document.querySelector("#lesson_2 .content")
+    if (content) content.hidden = !content.hidden
 }
 
-// 3. Đếm số lần click
-// Tạo 1 nút bấm và 1 đoạn text hiển thị số lần đã click. Mỗi lần click, số đếm tăng lên 1.
+function clickCount() {
+    const countText = document.querySelector("#lesson_3 .content")
+    if (!countText) return
 
-// 4. Thay đổi nội dung văn bản
-// Tạo 1 input text và 1 nút "Cập nhật". Khi click nút, lấy giá trị từ input và hiển thị vào 1 thẻ <p> bên dưới.
+    const count = Number(countText.dataset.count || 0) + 1
+    countText.dataset.count = count
+    countText.textContent = count
+}
 
-// 5. Đổi màu nền trang bằng danh sách màu
-// Tạo 3-4 nút với các màu khác nhau (Đỏ, Xanh, Vàng...). Click nút nào thì nền trang đổi sang màu đó.
+function updateText() {
+    const input = document.querySelector("#lesson_4 input")
+    const result = document.querySelector("#lesson_4 .result")
+    if (input && result) result.textContent = input.value
+}
 
-// 6. Thêm phần tử vào danh sách (to-do đơn giản)
-// Tạo 1 input và nút "Thêm". Khi nhập text và bấm nút, thêm 1 thẻ <li> mới vào danh sách <ul>.
+function changeBackground(color) {
+    document.body.style.backgroundColor = color
+}
 
-// 7. Xóa phần tử khỏi danh sách
-// Mở rộng bài 6: thêm nút "Xóa" (x) bên cạnh mỗi <li>, click vào thì xóa mục đó khỏi danh sách.
+function addTodo() {
+    const input = document.querySelector("#lesson_6 input")
+    const list = document.querySelector("#lesson_6 ul")
+    if (!input || !list || !input.value.trim()) return
 
-// 8. Kiểm tra độ dài chuỗi nhập vào
-// Tạo 1 ô input, khi người dùng gõ (dùng sự kiện input), hiển thị ngay số ký tự đã nhập bên dưới.
+    const item = document.createElement("li")
+    item.textContent = input.value.trim()
 
-// 9. Đổi kiểu chữ (bold/italic) khi hover
-// Tạo 1 đoạn văn bản, khi rê chuột vào (mouseover) thì chữ in đậm, khi rê ra (mouseout) thì trở lại bình thường.
+    const removeButton = document.createElement("button")
+    removeButton.textContent = " Xóa"
+    removeButton.onclick = () => item.remove()
+    item.append(removeButton)
 
-// 10. Form kiểm tra đơn giản (validate rỗng)
-// Tạo form có 1 input và nút "Gửi". Nếu input rỗng khi bấm nút, hiển thị thông báo lỗi màu đỏ bên dưới; nếu có dữ liệu, hiển thị thông báo thành công
+    list.append(item)
+    input.value = ""
+}
+
+function updateLength(input) {
+    const result = document.querySelector("#lesson_8 .result")
+    if (result) result.textContent = `${input.value.length} ký tự`
+}
+
+function makeBold(text) {
+    text.style.fontWeight = "bold"
+}
+
+function resetBold(text) {
+    text.style.fontWeight = "normal"
+}
+
+function validateForm(event) {
+    event.preventDefault()
+
+    const input = document.querySelector("#lesson_10 input")
+    const message = document.querySelector("#lesson_10 .message")
+    if (!input || !message) return
+
+    const hasValue = input.value.trim() !== ""
+    message.textContent = hasValue ? "Gửi thành công!" : "Vui lòng nhập dữ liệu."
+    message.style.color = hasValue ? "green" : "red"
+}
