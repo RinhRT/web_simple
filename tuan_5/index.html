@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Máy tính</h2>
+    <button onclick="tinh('+')">Cộng</button>
+    <button onclick="tinh('-')">Trừ</button>
+    <button onclick="tinh('*')">Nhân</button>
+    <button onclick="tinh('/')">Chia</button>
+    <p id="ketqua"></p>
+    <script>
+      function tinh(phepTinh) {
+        let so1 = Number(prompt("Nhập số thứ nhất:"));
+        let so2 = Number(prompt("Nhập số thứ hai:"));
+        let ketQua;
+        if (phepTinh == "+") {
+          ketQua = so1 + so2;
+        } else if (phepTinh == "-") {
+          ketQua = so1 - so2;
+        } else if (phepTinh == "*") {
+          ketQua = so1 * so2;
+        } else if (phepTinh == "/") {
+          if (so2 == 0) {
+            ketQua = "Không thể chia cho 0";
+          } else {
+            ketQua = so1 / so2;
+          }
+        }
+        document.getElementById("ketqua").innerHTML = "Kết quả: " + ketQua;
+      }
+    </script>
+  </body>
+</html>
